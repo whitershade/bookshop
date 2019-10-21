@@ -9,7 +9,7 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "localhost:3000",
+  "host": "localhost:8080",
   "basePath": "/api/v1",
   "tags": [
     {
@@ -25,5 +25,122 @@
   ],
   "produces": [
     "application/json"
-  ]
+  ],
+  "paths": {
+    "/books": {
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Get all books",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Books"
+            }
+          }
+        }
+      }
+    },
+    "/books/{bookId}": {
+      "parameters": [
+        {
+          "name": "bookId",
+          "in": "path",
+          "required": true,
+          "description": "Id of the book that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Get book with given Id",
+        "responses": {
+          "200": {
+            "description": "Book is found",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Book": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "Authors": {
+          "type": "array",
+          "$ref": "#/definitions/Author"
+        },
+        "Genres": {
+          "type": "array",
+          "$ref": "#/definitions/Genre"
+        }
+      }
+    },
+    "Books": {
+      "type": "array",
+      "$ref": "#/definitions/Book"
+    },
+    "Author": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      }
+    },
+    "Genre": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }
