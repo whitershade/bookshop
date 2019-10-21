@@ -1,0 +1,10 @@
+{
+  "development": {
+    "username": "books_user",
+    "password": "password",
+    "database": "bookshop",
+    "host": "mysql",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  }
+}
