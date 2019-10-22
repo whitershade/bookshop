@@ -3,8 +3,16 @@
     "username": "books_user",
     "password": "password",
     "database": "bookshop",
-    "host": "mysql",
+    "host": "mysql-development",
     "dialect": "mysql",
-    "operatorsAliases": false
+    "port": 3306
+  },
+  "test": {
+    "username": "books_user",
+    "password": "password",
+    "database": "bookshop",
+    "host": "mysql-test",
+    "dialect": "mysql",
+    "port": 3306
   }
 }

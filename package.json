@@ -10,7 +10,14 @@
     "prepush": "echo 'run tests'",
     "db:migrate": "cd sequelize && sequelize db:migrate",
     "db:seed": "cd sequelize && sequelize db:seed:all",
-    "db:fill": "npm run db:migrate && npm run db:seed"
+    "migrate:reset": "cd sequelize && sequelize db:migrate:undo:all && npm run db:migrate",
+    "dev:db:migrate": "NODE_ENV=development npm run db:migrate",
+    "dev:db:seed": "NODE_ENV=development npm run db:seed",
+    "dev:db:fill": "NODE_ENV=development npm run dev:db:migrate && npm run dev:db:seed",
+    "test:db:migrate": "NODE_ENV=test npm run db:migrate",
+    "test:db:seed": "NODE_ENV=test npm run db:seed",
+    "test:db:fill": "NODE_ENV=test npm run test:db:migrate && npm run test:db:seed",
+    "test": "NODE_ENV=test jest"
   },
   "author": "whitershade",
   "license": "ISC",
@@ -20,12 +27,14 @@
     "compression": "^1.7.4",
     "eslint-config-airbnb-base": "^14.0.0",
     "express": "^4.17.1",
+    "jest": "^24.9.0",
     "lodash": "^4.17.15",
     "markdown-js": "0.0.4",
     "morgan": "^1.9.1",
     "mysql2": "^1.7.0",
     "nodemon": "^1.19.3",
     "sequelize": "^5.21.1",
+    "supertest": "^4.0.2",
     "swagger-ui-express": "^4.1.2",
     "winston": "^3.2.1"
   },
@@ -36,5 +45,12 @@
     "eslint": "^6.5.1",
     "eslint-plugin-import": "^2.18.2",
     "sequelize-cli": "^5.5.1"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "verbose": true
   }
 }

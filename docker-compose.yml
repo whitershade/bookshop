@@ -7,15 +7,8 @@ services:
     container_name: node-app
     command: npm run start
     depends_on:
-      - mysql
+      - mysql-development
     restart: always
-    environment:
-      DB_HOSTNAME: mysql
-      MYSQL_USER: books_user
-      MYSQL_DATABASE: bookshop
-      MYSQL_PASSWORD: password
-      MYSQL_PORT: 3306
-      PORT: 8080
     ports:
       - "8080:8080"
     volumes:
@@ -24,31 +17,55 @@ services:
     networks:
       - app-network
 
-  migration:
-    build:
-      context: .
-    command: bash -c "cd ./build && ls && chmod +x ./run_migrations.sh && ./run_migrations.sh"
-    links:
-      - mysql
-    depends_on:
-      - mysql
-    networks:
-      - app-network
-
-  mysql:
+  mysql-development:
     image: mysql:5
-    container_name: mysql
+    container_name: mysql-development
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_USER: books_user
       MYSQL_DATABASE: bookshop
       MYSQL_PASSWORD: password
-      MYSQL_PORT: 3306
+      MYSQL_HOST: mysql-development
     ports:
       - "3306:3306"
-    expose:
-      - 3306
+    networks:
+      - app-network
+
+  mysql-test:
+    image: mysql:5
+    container_name: mysql-test
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: books_user
+      MYSQL_DATABASE: bookshop
+      MYSQL_PASSWORD: password
+      MYSQL_HOST: mysql-test
+    ports:
+      - "3307:3306"
+    networks:
+      - app-network
+
+  dev-migrations:
+    build:
+      context: .
+    command: bash -c "cd ./build && ls && chmod +x ./run_migrations.sh && ./run_migrations.sh dev"
+    links:
+      - mysql-development
+    depends_on:
+      - mysql-development
+    networks:
+      - app-network
+
+  test-migrations:
+    build:
+      context: .
+    command: bash -c "cd ./build && ls && chmod +x ./run_migrations.sh && ./run_migrations.sh test"
+    links:
+      - mysql-test
+    depends_on:
+      - mysql-test
     networks:
       - app-network
 

@@ -10,7 +10,7 @@ module.exports = (app) => {
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   // logging
-  app.use(morgan('combined', { stream: logger.stream }));
+  if (process.env.NODE_ENV !== 'test') app.use(morgan('combined', { stream: logger.stream }));
   // compress all responses
   app.use(compression());
   // routes
