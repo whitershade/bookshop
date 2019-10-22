@@ -2,6 +2,21 @@
 const Book = require('../../../../db/models/Book');
 const Author = require('../../../../db/models/Author');
 const Genre = require('../../../../db/models/Genre');
+const Rating = require('../../../../db/models/Rating');
+
+const defaultInclude = [
+  {
+    model: Author,
+    through: { attributes: [] },
+  },
+  {
+    model: Genre,
+    through: { attributes: [] },
+  },
+  {
+    model: Rating
+  },
+];
 
 const controllers = {
   getItem: async (req, res) => {
@@ -9,32 +24,14 @@ const controllers = {
       where: {
         id: req.params.id,
       },
-      include: [
-        {
-          model: Author,
-          through: { attributes: [] },
-        },
-        {
-          model: Genre,
-          through: { attributes: [] },
-        },
-      ],
+      include: defaultInclude,
     });
 
     res.json(book);
   },
   getItems: async (req, res) => {
     const books = await Book.findAll({
-      include: [
-        {
-          model: Author,
-          through: { attributes: [] },
-        },
-        {
-          model: Genre,
-          through: { attributes: [] },
-        },
-      ],
+      include: defaultInclude,
     });
 
     res.json(books);

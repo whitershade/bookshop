@@ -72,7 +72,7 @@
   "definitions": {
     "Book": {
       "required": [
-        "id"
+        "id", "name", "createdAt", "updatedAt"
       ],
       "properties": {
         "id": {
@@ -95,6 +95,10 @@
         "Genres": {
           "type": "array",
           "$ref": "#/definitions/Genre"
+        },
+        "Ratings": {
+          "type": "array",
+          "$ref": "#/definitions/Rating"
         }
       }
     },
@@ -104,7 +108,7 @@
     },
     "Author": {
       "required": [
-        "id"
+        "id", "name", "createdAt", "updatedAt"
       ],
       "properties": {
         "id": {
@@ -124,7 +128,7 @@
     },
     "Genre": {
       "required": [
-        "id"
+        "id", "name", "createdAt", "updatedAt"
       ],
       "properties": {
         "id": {
@@ -133,6 +137,29 @@
         },
         "name": {
           "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      }
+    },
+    "Rating": {
+      "required": [
+        "id", "bookId", "rate", "createdAt", "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "bookId": {
+          "type": "integer"
+        },
+        "rate": {
+          "type": "integer"
         },
         "createdAt": {
           "type": "string"
