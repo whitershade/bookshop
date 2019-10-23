@@ -7,8 +7,6 @@
     "start": "NODE_ENV=development node ./src/app.js",
     "dev:start": "NODE_ENV=development nodemon --watch ./src ./src/app.js",
     "lint": "eslint ./src --fix",
-    "precomit": "eslint ./src",
-    "prepush": "echo 'run tests'",
     "db:migrate": "cd sequelize && sequelize db:migrate",
     "db:seed": "cd sequelize && sequelize db:seed:all",
     "migrate:reset": "cd sequelize && sequelize db:migrate:undo:all && npm run db:migrate",

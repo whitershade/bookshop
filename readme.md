@@ -5,6 +5,10 @@
 
 `lint` - Run linter
 
-`precomit` - Run linter before commit
+`dev:start` - Run app with nodemon
 
-`prepush` - Run tests before push commit
+`db:migrate` - Migrate db
+
+`db:seed` - Seed db
+
+`test` - run tests
