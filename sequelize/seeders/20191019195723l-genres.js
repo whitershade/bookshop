@@ -6,6 +6,12 @@ module.exports = {
     name: 'Fantasy Fiction',
     createdAt: null,
     updatedAt: null,
+  },
+  {
+    id: 2,
+    name: 'Science Fiction',
+    createdAt: null,
+    updatedAt: null,
   }], {}),
 
   down: (queryInterface) => queryInterface.bulkDelete(tableName, null, {}),
