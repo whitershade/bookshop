@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=development nodemon --watch ./src ./src/app.js",
+    "start": "NODE_ENV=development node ./src/app.js",
+    "dev:start": "NODE_ENV=development nodemon --watch ./src ./src/app.js",
     "lint": "eslint ./src --fix",
     "precomit": "eslint ./src",
     "prepush": "echo 'run tests'",
@@ -17,7 +18,7 @@
     "test:db:migrate": "NODE_ENV=test npm run db:migrate",
     "test:db:seed": "NODE_ENV=test npm run db:seed",
     "test:db:fill": "NODE_ENV=test npm run test:db:migrate && npm run test:db:seed",
-    "test": "NODE_ENV=test jest"
+    "test": "NODE_ENV=test jest --forceExit"
   },
   "author": "whitershade",
   "license": "ISC",
