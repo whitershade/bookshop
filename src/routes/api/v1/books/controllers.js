@@ -14,7 +14,7 @@ const defaultInclude = [
     through: { attributes: [] },
   },
   {
-    model: Rating
+    model: Rating,
   },
 ];
 
