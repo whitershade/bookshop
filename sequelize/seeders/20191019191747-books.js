@@ -4,20 +4,20 @@ module.exports = {
   up: (queryInterface) => queryInterface.bulkInsert(tableName, [{
     id: 1,
     name: 'Harry Potter',
-    createdAt: null,
-    updatedAt: null,
+    createdAt: '2019-10-26T21:24:24.000Z',
+    updatedAt: '2019-10-26T21:24:24.000Z',
   },
   {
     id: 2,
     name: 'The Hobbit',
-    createdAt: null,
-    updatedAt: null,
+    createdAt: '2019-10-26T21:24:24.000Z',
+    updatedAt: '2019-10-26T21:24:24.000Z',
   },
   {
     id: 3,
     name: 'The wind from the Sun',
-    createdAt: null,
-    updatedAt: null,
+    createdAt: '2019-10-26T21:24:24.000Z',
+    updatedAt: '2019-10-26T21:24:24.000Z',
   }], {}),
 
   down: (queryInterface) => queryInterface.bulkDelete(tableName, null, {}),
