@@ -103,6 +103,15 @@ const controllers = {
 
     res.json(books);
   },
+
+  searchItems: async (req, res) => {
+    const authors = await Book.findAll({
+      where: { '$Authors.name$': req.query.author },
+      include: defaultInclude,
+    });
+
+    res.json(authors);
+  },
 };
 
 module.exports = controllers;
