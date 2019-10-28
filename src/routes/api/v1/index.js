@@ -5,6 +5,7 @@ const { Router } = require('express');
 const markdown = require('markdown-js');
 const swaggerUi = require('swagger-ui-express');
 const books = require('./books');
+const rates = require('./rates');
 const swaggerDocument = require('./swagger.json');
 
 const router = Router();
@@ -13,6 +14,7 @@ const filePath = path.join(appRoot.toString(), 'readme.md');
 router
   .use('/swagger', swaggerUi.serve)
   .use('/books', books)
+  .use('/ratings', rates)
   .get('/swagger', swaggerUi.setup(swaggerDocument))
   .get('/readme', (req, res) => {
     const str = fs.readFileSync(filePath, 'utf8');
