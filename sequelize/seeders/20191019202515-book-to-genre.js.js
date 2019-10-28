@@ -1,23 +1,24 @@
 const tableName = 'BookToGenre';
+const date = Date.now();
 
 module.exports = {
   up: (queryInterface) => queryInterface.bulkInsert(tableName, [{
     bookId: 1,
     genreId: 1,
-    createdAt: '2019-10-26T21:24:24.000Z',
-    updatedAt: '2019-10-26T21:24:24.000Z',
+    createdAt: date,
+    updatedAt: date,
   },
   {
     bookId: 2,
     genreId: 1,
-    createdAt: '2019-10-26T21:24:24.000Z',
-    updatedAt: '2019-10-26T21:24:24.000Z',
+    createdAt: date,
+    updatedAt: date,
   },
   {
     bookId: 3,
     genreId: 2,
-    createdAt: '2019-10-26T21:24:24.000Z',
-    updatedAt: '2019-10-26T21:24:24.000Z',
+    createdAt: date,
+    updatedAt: date,
   }], {}),
 
   down: (queryInterface) => queryInterface.bulkDelete(tableName, null, {}),

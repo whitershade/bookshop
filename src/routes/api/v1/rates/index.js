@@ -5,6 +5,6 @@ const router = Router();
 
 router
   .post('/', controllers.createItem)
-  .patch('/:id', controllers.updateItem)
+  .patch('/:id', controllers.updateItem);
 
 module.exports = router;
