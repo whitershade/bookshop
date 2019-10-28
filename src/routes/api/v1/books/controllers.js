@@ -1,4 +1,4 @@
-const { size } = require('lodash');
+const { size, round } = require('lodash');
 
 const {
   Book, Author, Genre, Rating,
@@ -21,9 +21,7 @@ const defaultInclude = [
 const controllers = {
   getItem: async (req, res) => {
     const book = await Book.findOne({
-      where: {
-        id: req.params.id,
-      },
+      where: { id: req.params.id },
       include: defaultInclude,
     });
 
@@ -43,9 +41,7 @@ const controllers = {
     ]);
 
     const bookWithIncludes = await Book.findOne({
-      where: {
-        id: book.id,
-      },
+      where: { id: book.id },
       include: defaultInclude,
     });
 
@@ -69,9 +65,7 @@ const controllers = {
     await Promise.all(updateIncludes);
 
     const newBook = await Book.findOne({
-      where: {
-        id,
-      },
+      where: { id },
       include: defaultInclude,
     });
 
@@ -80,37 +74,52 @@ const controllers = {
 
   deleteItem: async (req, res) => {
     const book = await Book.findOne({
-      where: {
-        id: req.params.id,
-      },
+      where: { id: req.params.id },
     });
 
     if (!book) return res.sendStatus(404);
 
     await Book.destroy({
-      where: {
-        id: req.params.id,
-      },
+      where: { id: req.params.id },
     });
 
     return res.sendStatus(200);
   },
 
   getItems: async (req, res) => {
-    const books = await Book.findAll({
-      include: defaultInclude,
-    });
+    const books = await Book.findAll({ include: defaultInclude });
 
     res.json(books);
   },
 
   searchItems: async (req, res) => {
-    const authors = await Book.findAll({
-      where: { '$Authors.name$': req.query.author },
-      include: defaultInclude,
+    const { author, minRate } = req.query;
+
+    if (!author && !minRate) return res.sendStatus(403);
+
+    let books;
+
+    if (author) {
+      books = await Book.findAll({
+        where: { '$Authors.name$': author },
+        include: defaultInclude,
+      });
+    } else {
+      books = await Book.findAll({ include: defaultInclude });
+    }
+
+    if (!minRate) return res.json(books);
+
+    const booksFilteredByMinRating = books.filter((book) => {
+      const sumOfRates = book.Ratings.reduce((accum, { rate }) => accum + rate, 0);
+      const averageRate = round(sumOfRates / size(book.Ratings), 2);
+
+      if (averageRate >= minRate) return true;
+
+      return false;
     });
 
-    res.json(authors);
+    return res.json(booksFilteredByMinRating);
   },
 };
 

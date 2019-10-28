@@ -1,5 +1,5 @@
 const tableName = 'Authors';
-const date = Date.now();
+const date = null;
 
 module.exports = {
   up: (queryInterface) => queryInterface.bulkInsert(tableName, [{

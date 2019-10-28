@@ -13,7 +13,7 @@ const controllers = {
   },
 
   updateItem: async (req, res) => {
-    const { body: { rate }, params: { id } } = req;
+    const { body: { rate, bookId }, params: { id } } = req;
 
     const rating = await Rating.findOne({
       where: { id },
@@ -21,7 +21,12 @@ const controllers = {
 
     if (!rating) return res.sendStatus(404);
 
-    const newRating = await rating.update({ rate });
+    const update = {};
+
+    if (rate) update.rate = rate;
+    if (bookId) update.bookId = bookId;
+
+    const newRating = await rating.update(update);
 
     return res.json(newRating);
   },

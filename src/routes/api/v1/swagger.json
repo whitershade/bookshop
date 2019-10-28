@@ -67,6 +67,60 @@
           }
         }
       }
+    },
+    "/ratings": {
+      "post": {
+        "tags": [
+          "Ratings"
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "example": {
+            "bookId": 1,
+            "rate": 10
+          }
+        }],
+        "summary": "Create new Rating",
+        "responses": {
+          "200": {
+            "description": "Rating was created",
+            "schema": {
+              "$ref": "#/definitions/Rating"
+            }
+          }
+        }
+      }
+    },
+    "/ratings/{ratingId}": {
+      "patch": {
+        "tags": [
+          "Ratings"
+        ],
+        "parameters": [{
+          "name": "ratingId",
+          "in": "path",
+          "required": true,
+          "description": "Id of the Rating that we want to update",
+          "type": "string"
+        }, {
+          "name": "body",
+          "in": "body",
+          "example": {
+            "bookId": 1,
+            "rate": 10
+          }
+        }],
+        "summary": "Edit Rating",
+        "responses": {
+          "200": {
+            "description": "Rating was updated",
+            "schema": {
+              "$ref": "#/definitions/Rating"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {

@@ -5,7 +5,7 @@ const { Router } = require('express');
 const markdown = require('markdown-js');
 const swaggerUi = require('swagger-ui-express');
 const books = require('./books');
-const rates = require('./rates');
+const rates = require('./ratings');
 const swaggerDocument = require('./swagger.json');
 
 const router = Router();
