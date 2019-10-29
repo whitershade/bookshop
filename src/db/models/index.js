@@ -2,6 +2,7 @@ const Author = require('./Author');
 const Book = require('./Book');
 const Genre = require('./Genre');
 const Rating = require('./Rating');
+const User = require('./User');
 
 // Book
 Book.belongsToMany(Author, {
@@ -37,4 +38,5 @@ module.exports = {
   Book,
   Genre,
   Rating,
+  User,
 };

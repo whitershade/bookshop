@@ -16,8 +16,10 @@ User.init({
     len: [2, 50],
     trim: true,
   },
-  avatar: {
-    type: DataTypes.BLOB,
+  avatarURL: {
+    type: DataTypes.STRING,
+    len: [2, 50],
+    trim: true,
   },
 }, { sequelize, modelName: 'User' });
 

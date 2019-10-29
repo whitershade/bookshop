@@ -1,3 +1,5 @@
+const path = require('path');
+const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const compression = require('compression');
@@ -9,6 +11,8 @@ module.exports = (app) => {
   // parse body
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
+  // static
+  app.use(express.static(path.join(__dirname, '..', 'public')));
   // logging
   if (process.env.NODE_ENV !== 'test') app.use(morgan('combined', { stream: logger.stream }));
   // compress all responses

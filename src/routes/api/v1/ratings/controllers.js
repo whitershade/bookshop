@@ -1,10 +1,10 @@
-const { Rating } = require('../../../../db/models');
+const { User } = require('../../../../db/models');
 
 const controllers = {
   createItem: async (req, res) => {
     const { body: { rate, bookId } } = req;
 
-    const newRate = await Rating.create({
+    const newRate = await User.create({
       rate,
       bookId,
     });
@@ -15,7 +15,7 @@ const controllers = {
   updateItem: async (req, res) => {
     const { body: { rate, bookId }, params: { id } } = req;
 
-    const rating = await Rating.findOne({
+    const rating = await User.findOne({
       where: { id },
     });
 
@@ -26,9 +26,9 @@ const controllers = {
     if (rate) update.rate = rate;
     if (bookId) update.bookId = bookId;
 
-    const newRating = await rating.update(update);
+    const updatedRating = await rating.update(update);
 
-    return res.json(newRating);
+    return res.json(updatedRating);
   },
 };
 

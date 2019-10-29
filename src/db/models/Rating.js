@@ -8,14 +8,6 @@ Rating.init({
     type: DataTypes.NUMBER,
     allowNull: false,
   },
-  bookId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'Book',
-      key: 'id',
-    },
-  },
 }, { sequelize, modelName: 'Rating' });
 
 module.exports = Rating;
