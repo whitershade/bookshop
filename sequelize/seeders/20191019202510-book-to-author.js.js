@@ -7,10 +7,18 @@ module.exports = {
   },
   {
     bookId: 2,
-    authorId: 2,
+    authorId: 1,
   },
   {
     bookId: 3,
+    authorId: 1,
+  },
+  {
+    bookId: 4,
+    authorId: 2,
+  },
+  {
+    bookId: 5,
     authorId: 3,
   }], {}),
 

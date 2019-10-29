@@ -149,6 +149,40 @@
         }
       ]
     },
+    "/books/search?author={author}&minRate={minRate}": {
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Get filtered books",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Books"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "author",
+            "in": "path",
+            "required": false,
+            "description": "Author name",
+            "type": "string",
+            "default": "Joanne Rowling"
+          },
+          {
+            "name": "minRate",
+            "in": "path",
+            "required": false,
+            "description": "Min rate",
+            "type": "number",
+            "default": 8
+          }
+        ]
+      }
+    },
     "/ratings": {
       "post": {
         "tags": [

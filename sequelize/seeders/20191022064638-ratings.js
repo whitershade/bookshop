@@ -7,18 +7,14 @@ module.exports = {
   },
   {
     bookId: 1,
-    rate: 9,
-  },
-  {
-    bookId: 1,
-    rate: 8,
+    rate: 10,
   },
   {
     bookId: 1,
     rate: 10,
   },
   {
-    bookId: 2,
+    bookId: 1,
     rate: 10,
   },
   {
@@ -30,12 +26,16 @@ module.exports = {
     rate: 8,
   },
   {
-    bookId: 3,
-    rate: 10,
+    bookId: 2,
+    rate: 8,
   },
   {
     bookId: 3,
-    rate: 10,
+    rate: 7,
+  },
+  {
+    bookId: 3,
+    rate: 8,
   },
   {
     bookId: 3,
@@ -47,7 +47,15 @@ module.exports = {
   },
   {
     bookId: 3,
+    rate: 7,
+  },
+  {
+    bookId: 4,
     rate: 10,
+  },
+  {
+    bookId: 5,
+    rate: 9,
   }], {}),
 
   down: (queryInterface) => queryInterface.bulkDelete(tableName, null, {}),
