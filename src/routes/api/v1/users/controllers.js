@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { first } = require('lodash');
+const { first, get } = require('lodash');
 const { getAvatarPath } = require('./utils');
 const { User } = require('../../../../db/models');
 
@@ -8,18 +8,20 @@ const destinationPath = path.join(__dirname, '..', '..', '..', '..', '..', 'publ
 
 const controllers = {
   createItem: async (req, res) => {
-    const { body: { firstName, lastName }, files: { avatar } } = req;
+    const { body: { firstName, lastName } } = req;
 
+    const avatar = get(req, 'files.avatar');
     const newUser = await User.create({
       firstName,
       lastName,
-      avatarURL: getAvatarPath(first(avatar).path),
+      avatarURL: avatar ? getAvatarPath(first(avatar).path) : null,
     });
 
     res.json(newUser);
   },
   updateItem: async (req, res) => {
-    const { params: { id }, body: { firstName, lastName }, files: { avatar } } = req;
+    const { params: { id }, body: { firstName, lastName } } = req;
+    const avatar = get(req, 'files.avatar');
     let filePath;
 
     const user = await User.findOne({
@@ -34,7 +36,7 @@ const controllers = {
     if (lastName) update.lastName = lastName;
     if (avatar) {
       filePath = user.avatarURL;
-      fs.unlinkSync(`${destinationPath}/${filePath}`);
+      if (filePath) fs.unlinkSync(`${destinationPath}/${filePath}`);
 
       update.avatarURL = getAvatarPath(first(avatar).path);
     }

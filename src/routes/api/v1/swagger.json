@@ -236,6 +236,76 @@
           }
         }
       }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "formData",
+          "name": "firstName",
+          "type": "string"
+        }, {
+          "name": "body",
+          "in": "formData",
+          "name": "lastName",
+          "type": "string"
+        }, {
+          "in": "formData",
+          "type": "file",
+          "description": "The avatar to upload",
+          "name": "avatar"
+        }],
+        "summary": "Create new User",
+        "responses": {
+          "200": {
+            "description": "User was created",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [{
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "description": "Id of the Rating that we want to update",
+          "type": "string"
+        }, {
+          "name": "body",
+          "in": "formData",
+          "name": "firstName",
+          "type": "string"
+        }, {
+          "name": "body",
+          "in": "formData",
+          "name": "lastName",
+          "type": "string"
+        }, {
+          "in": "formData",
+          "type": "file",
+          "description": "The avatar to upload",
+          "name": "avatar"
+        }],
+        "summary": "Edit User",
+        "responses": {
+          "200": {
+            "description": "User was updated",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -329,6 +399,32 @@
         },
         "rate": {
           "type": "integer"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "required": [
+        "id", "firstName", "lastName", "avatarURL", "createdAt", "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "avatarURL": {
+          "type": "string"
         },
         "createdAt": {
           "type": "string"

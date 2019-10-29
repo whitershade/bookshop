@@ -1,4 +1,5 @@
 const fs = require('fs');
+const uniqid = require('uniqid');
 const { last } = require('lodash');
 const multer = require('multer');
 const path = require('path');
@@ -16,7 +17,7 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const fileExtension = last(file.originalname.split('.'));
 
-    cb(null, `${Date.now()}.${fileExtension}`);
+    cb(null, `${uniqid()}.${fileExtension}`);
   },
 });
 
