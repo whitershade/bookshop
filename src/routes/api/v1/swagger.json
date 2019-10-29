@@ -43,16 +43,32 @@
         }
       }
     },
-    "/books/{bookId}": {
-      "parameters": [
-        {
-          "name": "bookId",
-          "in": "path",
-          "required": true,
-          "description": "Id of the book that we want to find",
-          "type": "string"
+    "/books/": {
+      "post": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Create new Book",
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "example": {
+            "name": "new book",
+            "authorIds": [1],
+            "genreIds": [1]
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Books"
+            }
+          }
         }
-      ],
+      }
+    },
+    "/books/{bookId}": {
       "get": {
         "tags": [
           "Books"
@@ -66,7 +82,72 @@
             }
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "name": "bookId",
+          "in": "path",
+          "required": true,
+          "description": "Id of the book that we want to find",
+          "type": "string"
+        }
+      ]
+    },
+    "/books/{bookIdToUpdate}": {
+      "patch": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Update book with given Id",
+        "responses": {
+          "200": {
+            "description": "Book was updated",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "bookIdToUpdate",
+          "in": "path",
+          "required": true,
+          "description": "Id of the book that we want to update",
+          "type": "string"
+        },
+        {
+          "name": "body",
+          "in": "body",
+          "example": {
+            "name": "updated book",
+            "authorIds": [3],
+            "genreIds": [2]
+          }
+        }
+      ]
+    },
+    "/books/{bookIdToRemove}": {
+      "delete": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Remove book by id",
+        "responses": {
+          "200": {
+            "description": "Book was deleted"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "bookIdToRemove",
+          "in": "path",
+          "required": true,
+          "description": "Id of the book we want to delete",
+          "type": "number"
+        }
+      ]
     },
     "/ratings": {
       "post": {

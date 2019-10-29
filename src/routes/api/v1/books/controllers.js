@@ -77,6 +77,8 @@ const controllers = {
       where: { id: req.params.id },
     });
 
+    console.log(req.params.id);
+
     if (!book) return res.sendStatus(404);
 
     await Book.destroy({
