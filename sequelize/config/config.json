@@ -11,8 +11,8 @@
     "username": "books_user",
     "password": "password",
     "database": "bookshop",
-    "host": "mysql-test",
+    "host": "localhost",
     "dialect": "mysql",
-    "port": 3306
+    "port": 3307
   }
 }
