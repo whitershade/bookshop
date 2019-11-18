@@ -30,7 +30,6 @@ const controllers = {
 
   createItem: async (req, res) => {
     const { name, authorIds, genreIds } = req.body;
-    console.log(name, authorIds, genreIds);
 
     const book = await Book.create({ name });
 

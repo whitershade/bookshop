@@ -17,12 +17,7 @@
     "dev:db:drop": "NODE_ENV=development npm run db:drop",
     "dev:db:create": "NODE_ENV=development npm run db:create",
     "dev:db:fill": "NODE_ENV=development npm run dev:db:drop && npm run dev:db:create && npm run dev:db:migrate && npm run dev:db:seed",
-    "test:db:migrate": "NODE_ENV=test npm run db:migrate",
-    "test:db:seed": "NODE_ENV=test npm run db:seed",
-    "test:db:drop": "NODE_ENV=test npm run db:drop",
-    "test:db:create": "NODE_ENV=test npm run db:create",
-    "test:db:fill": "NODE_ENV=development npm run test:db:drop && npm run test:db:create && npm run test:db:migrate",
-    "test": "NODE_ENV=test jest --forceExit"
+    "test": "NODE_ENV=test jest --runInBand"
   },
   "author": "whitershade",
   "license": "ISC",

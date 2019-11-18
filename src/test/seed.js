@@ -1,20 +1,6 @@
 const models = require('../db/models');
 const sequelize = require('../db/sequelize');
 
-const defaultInclude = [
-  {
-    model: models.Author,
-    through: { attributes: [] },
-  },
-  {
-    model: models.Genre,
-    through: { attributes: [] },
-  },
-  {
-    model: models.Rating,
-  },
-];
-
 const DATETIME = '2019-11-12T08:19:13.000Z';
 
 const authorNames = [
@@ -132,10 +118,6 @@ const seedDb = async () => {
     books[3].addGenre(genres[0]),
     books[4].addGenre(genres[1]),
   ]);
-
-  const books1 = await models.Book.findAll({ include: defaultInclude });
-
-  console.log(books1[4]);
 };
 
 const clearDb = async () => {

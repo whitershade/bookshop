@@ -7,7 +7,7 @@ const {
 const sequelize = require('../../../../../db/sequelize');
 
 const books = require('./seed');
-const { app } = require('../../../../../app');
+const { app, server } = require('../../../../../app');
 
 beforeEach(async () => {
   await sequelize.sync();
@@ -17,6 +17,7 @@ beforeEach(async () => {
 
 afterAll(async () => {
   await sequelize.close();
+  await server.close();
 });
 
 describe('GET', () => {
