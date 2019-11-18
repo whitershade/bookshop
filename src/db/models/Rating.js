@@ -5,7 +5,7 @@ class Rating extends Model {}
 
 Rating.init({
   rate: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
 }, { sequelize, modelName: 'Rating' });

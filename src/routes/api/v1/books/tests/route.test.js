@@ -1,9 +1,23 @@
-/* global describe, it, expect */
+/* global describe, it, expect, beforeEach, afterAll */
 const request = require('supertest');
 const { omit } = require('lodash');
+const {
+  seedDb, clearDb, DATETIME,
+} = require('../../../../../test/seed');
+const sequelize = require('../../../../../db/sequelize');
 
 const books = require('./seed');
-const app = require('../../../../../app');
+const { app } = require('../../../../../app');
+
+beforeEach(async () => {
+  await sequelize.sync();
+  await clearDb();
+  await seedDb();
+});
+
+afterAll(async () => {
+  await sequelize.close();
+});
 
 describe('GET', () => {
   it('should return all books', async () => {
@@ -42,16 +56,16 @@ describe('POST', () => {
         {
           id: 1,
           name: 'Joanne Rowling',
-          updatedAt: null,
-          createdAt: null,
+          updatedAt: DATETIME,
+          createdAt: DATETIME,
         },
       ],
       Genres: [
         {
           id: 1,
           name: 'Fantasy Fiction',
-          updatedAt: null,
-          createdAt: null,
+          updatedAt: DATETIME,
+          createdAt: DATETIME,
         }],
     });
   });
@@ -59,30 +73,38 @@ describe('POST', () => {
 
 describe('PATCH', () => {
   it('should update book', async () => {
-    const res = await request(app).patch('/api/v1/books/6').send({
+    const res = await request(app).patch('/api/v1/books/5').send({
       name: 'Updated book',
       genreIds: [2],
       authorIds: [2],
     });
     expect(res.statusCode).toEqual(200);
     expect(omit(res.body, ['createdAt', 'updatedAt'])).toEqual({
-      id: 6,
+      id: 5,
       name: 'Updated book',
-      Ratings: [],
+      Ratings: [
+        {
+          bookId: 5,
+          createdAt: '2019-11-12T08:19:13.000Z',
+          id: 14,
+          rate: 9,
+          updatedAt: '2019-11-12T08:19:13.000Z',
+        },
+      ],
       Authors: [
         {
           id: 2,
           name: 'John Ronald Reuel Tolkien',
-          updatedAt: null,
-          createdAt: null,
+          updatedAt: DATETIME,
+          createdAt: DATETIME,
         },
       ],
       Genres: [
         {
           id: 2,
           name: 'Science Fiction',
-          updatedAt: null,
-          createdAt: null,
+          updatedAt: DATETIME,
+          createdAt: DATETIME,
         }],
     });
   });
@@ -90,10 +112,11 @@ describe('PATCH', () => {
 
 describe('DELETE', () => {
   it('should delete book', async () => {
-    const res = await request(app).delete('/api/v1/books/6');
+    const res = await request(app).delete('/api/v1/books/5');
     expect(res.statusCode).toEqual(200);
 
     const allBooksRes = await request(app).get('/api/v1/books');
-    expect(allBooksRes.body).toEqual(books);
+    const allBooksWithoutLast = books.slice(0, -1);
+    expect(allBooksRes.body).toEqual(allBooksWithoutLast);
   });
 });

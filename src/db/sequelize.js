@@ -1,3 +1,4 @@
+require('../config');
 const Sequelize = require('sequelize');
 
 const {

@@ -30,10 +30,9 @@ const controllers = {
 
   createItem: async (req, res) => {
     const { name, authorIds, genreIds } = req.body;
+    console.log(name, authorIds, genreIds);
 
-    const book = await Book.create({
-      name,
-    });
+    const book = await Book.create({ name });
 
     await Promise.all([
       book.addAuthors(authorIds),
@@ -76,8 +75,6 @@ const controllers = {
     const book = await Book.findOne({
       where: { id: req.params.id },
     });
-
-    console.log(req.params.id);
 
     if (!book) return res.sendStatus(404);
 

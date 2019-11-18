@@ -21,14 +21,15 @@
     "test:db:seed": "NODE_ENV=test npm run db:seed",
     "test:db:drop": "NODE_ENV=test npm run db:drop",
     "test:db:create": "NODE_ENV=test npm run db:create",
-    "test:db:fill": "NODE_ENV=development npm run test:db:drop && npm run test:db:create && npm run test:db:migrate && npm run test:db:seed",
-    "test": "npm run test:db:fill && NODE_ENV=test jest --forceExit"
+    "test:db:fill": "NODE_ENV=development npm run test:db:drop && npm run test:db:create && npm run test:db:migrate",
+    "test": "NODE_ENV=test jest --forceExit"
   },
   "author": "whitershade",
   "license": "ISC",
   "dependencies": {
     "app-root-path": "^2.2.1",
     "body-parser": "^1.19.0",
+    "child-process-promise": "^2.2.1",
     "compression": "^1.7.4",
     "eslint-config-airbnb-base": "^14.0.0",
     "express": "^4.17.1",
