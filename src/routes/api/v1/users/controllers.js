@@ -81,7 +81,14 @@ const controllers = {
       role: user.role,
     };
     const token = await sign(payload, 'secret', { expiresIn: 3600 });
+    res.cookie('token', `Bearer ${token}`);
+
     return res.json({ token: `Bearer ${token}` });
+  },
+  logout: (req, res) => {
+    res.clearCookie('token');
+
+    return res.sendStatus(200);
   },
 };
 

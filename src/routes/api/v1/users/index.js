@@ -7,6 +7,7 @@ const router = Router();
 router
   .post('/', upload.fields([{ name: 'avatar', maxCount: 1 }]), controllers.createItem)
   .patch('/:id', upload.fields([{ name: 'avatar', maxCount: 1 }]), controllers.updateItem)
-  .post('/login', controllers.login);
+  .post('/login', controllers.login)
+  .get('/logout', controllers.logout);
 
 module.exports = router;

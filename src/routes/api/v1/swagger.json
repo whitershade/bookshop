@@ -306,6 +306,28 @@
           }
         }
       }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "example": {
+            "email": "my-email@email.com",
+            "password": "qwerty"
+          }
+        }]
+      }
+    },
+    "/users/logout": {
+      "get": {
+        "tags": [
+          "Users"
+        ]
+      }
     }
   },
   "definitions": {
