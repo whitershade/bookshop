@@ -17,7 +17,7 @@ const genRandomString = function (length) {
  * @param {string} password - List of required fields.
  * @param {string} salt - Data to be validated.
  */
-const getPasswordHashAndSalt = function (password, salt) {
+const sha512 = function (password, salt) {
   const hash = crypto.createHmac('sha512', salt); /** Hashing algorithm sha512 */
   hash.update(password);
   const value = hash.digest('hex');
@@ -27,10 +27,16 @@ const getPasswordHashAndSalt = function (password, salt) {
   };
 };
 
-function saltHashPassword(userpassword) {
+function getPasswordHashAndSalt(userpassword) {
   const salt = genRandomString(16); /** Gives us salt of length 16 */
   const passwordData = sha512(userpassword, salt);
   console.log(`UserPassword = ${userpassword}`);
   console.log(`Passwordhash = ${passwordData.passwordHash}`);
   console.log(`nSalt = ${passwordData.salt}`);
+  return passwordData;
 }
+
+module.exports = {
+  sha512,
+  getPasswordHashAndSalt,
+};
