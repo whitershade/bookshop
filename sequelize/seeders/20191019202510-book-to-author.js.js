@@ -4,20 +4,22 @@ module.exports = {
   up: (queryInterface) => queryInterface.bulkInsert(tableName, [{
     bookId: 1,
     authorId: 1,
-    createdAt: null,
-    updatedAt: null,
   },
   {
     bookId: 2,
-    authorId: 2,
-    createdAt: null,
-    updatedAt: null,
+    authorId: 1,
   },
   {
     bookId: 3,
+    authorId: 1,
+  },
+  {
+    bookId: 4,
+    authorId: 2,
+  },
+  {
+    bookId: 5,
     authorId: 3,
-    createdAt: null,
-    updatedAt: null,
   }], {}),
 
   down: (queryInterface) => queryInterface.bulkDelete(tableName, null, {}),

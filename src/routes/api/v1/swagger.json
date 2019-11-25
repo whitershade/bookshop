@@ -43,16 +43,32 @@
         }
       }
     },
-    "/books/{bookId}": {
-      "parameters": [
-        {
-          "name": "bookId",
-          "in": "path",
-          "required": true,
-          "description": "Id of the book that we want to find",
-          "type": "string"
+    "/books/": {
+      "post": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Create new Book",
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "example": {
+            "name": "new book",
+            "authorIds": [1],
+            "genreIds": [1]
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Books"
+            }
+          }
         }
-      ],
+      }
+    },
+    "/books/{bookId}": {
       "get": {
         "tags": [
           "Books"
@@ -63,6 +79,229 @@
             "description": "Book is found",
             "schema": {
               "$ref": "#/definitions/Book"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "bookId",
+          "in": "path",
+          "required": true,
+          "description": "Id of the book that we want to find",
+          "type": "string"
+        }
+      ]
+    },
+    "/books/{bookIdToUpdate}": {
+      "patch": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Update book with given Id",
+        "responses": {
+          "200": {
+            "description": "Book was updated",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "bookIdToUpdate",
+          "in": "path",
+          "required": true,
+          "description": "Id of the book that we want to update",
+          "type": "string"
+        },
+        {
+          "name": "body",
+          "in": "body",
+          "example": {
+            "name": "updated book",
+            "authorIds": [3],
+            "genreIds": [2]
+          }
+        }
+      ]
+    },
+    "/books/{bookIdToRemove}": {
+      "delete": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Remove book by id",
+        "responses": {
+          "200": {
+            "description": "Book was deleted"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "bookIdToRemove",
+          "in": "path",
+          "required": true,
+          "description": "Id of the book we want to delete",
+          "type": "number"
+        }
+      ]
+    },
+    "/books/search?author={author}&minRate={minRate}": {
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "summary": "Get filtered books",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Books"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "author",
+            "in": "path",
+            "required": false,
+            "description": "Author name",
+            "type": "string",
+            "default": "Joanne Rowling"
+          },
+          {
+            "name": "minRate",
+            "in": "path",
+            "required": false,
+            "description": "Min rate",
+            "type": "number",
+            "default": 8
+          }
+        ]
+      }
+    },
+    "/ratings": {
+      "post": {
+        "tags": [
+          "Ratings"
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "example": {
+            "bookId": 1,
+            "rate": 10
+          }
+        }],
+        "summary": "Create new Rating",
+        "responses": {
+          "200": {
+            "description": "Rating was created",
+            "schema": {
+              "$ref": "#/definitions/Rating"
+            }
+          }
+        }
+      }
+    },
+    "/ratings/{ratingId}": {
+      "patch": {
+        "tags": [
+          "Ratings"
+        ],
+        "parameters": [{
+          "name": "ratingId",
+          "in": "path",
+          "required": true,
+          "description": "Id of the Rating that we want to update",
+          "type": "string"
+        }, {
+          "name": "body",
+          "in": "body",
+          "example": {
+            "bookId": 1,
+            "rate": 10
+          }
+        }],
+        "summary": "Edit Rating",
+        "responses": {
+          "200": {
+            "description": "Rating was updated",
+            "schema": {
+              "$ref": "#/definitions/Rating"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "formData",
+          "name": "firstName",
+          "type": "string"
+        }, {
+          "name": "body",
+          "in": "formData",
+          "name": "lastName",
+          "type": "string"
+        }, {
+          "in": "formData",
+          "type": "file",
+          "description": "The avatar to upload",
+          "name": "avatar"
+        }],
+        "summary": "Create new User",
+        "responses": {
+          "200": {
+            "description": "User was created",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [{
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "description": "Id of the Rating that we want to update",
+          "type": "string"
+        }, {
+          "name": "body",
+          "in": "formData",
+          "name": "firstName",
+          "type": "string"
+        }, {
+          "name": "body",
+          "in": "formData",
+          "name": "lastName",
+          "type": "string"
+        }, {
+          "in": "formData",
+          "type": "file",
+          "description": "The avatar to upload",
+          "name": "avatar"
+        }],
+        "summary": "Edit User",
+        "responses": {
+          "200": {
+            "description": "User was updated",
+            "schema": {
+              "$ref": "#/definitions/User"
             }
           }
         }
@@ -160,6 +399,32 @@
         },
         "rate": {
           "type": "integer"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "required": [
+        "id", "firstName", "lastName", "avatarURL", "createdAt", "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "avatarURL": {
+          "type": "string"
         },
         "createdAt": {
           "type": "string"

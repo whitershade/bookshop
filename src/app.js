@@ -8,8 +8,11 @@ const app = express();
 
 middlewares(app);
 
-app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, () => {
   logger.info(`Server started with env: ${process.env.NODE_ENV} on port ${process.env.PORT}`);
 });
 
-module.exports = app;
+module.exports = {
+  app,
+  server,
+};

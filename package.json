@@ -4,25 +4,27 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=development node ./src/app.js",
+    "start": "NODE_ENV=development nodemon --watch ./src ./src/app.js",
     "dev:start": "NODE_ENV=development nodemon --watch ./src ./src/app.js",
     "lint": "eslint ./src --fix",
     "db:migrate": "cd sequelize && sequelize db:migrate",
     "db:seed": "cd sequelize && sequelize db:seed:all",
+    "db:drop": "cd sequelize && sequelize db:drop",
+    "db:create": "cd sequelize && sequelize db:create",
     "migrate:reset": "cd sequelize && sequelize db:migrate:undo:all && npm run db:migrate",
     "dev:db:migrate": "NODE_ENV=development npm run db:migrate",
     "dev:db:seed": "NODE_ENV=development npm run db:seed",
-    "dev:db:fill": "NODE_ENV=development npm run dev:db:migrate && npm run dev:db:seed",
-    "test:db:migrate": "NODE_ENV=test npm run db:migrate",
-    "test:db:seed": "NODE_ENV=test npm run db:seed",
-    "test:db:fill": "NODE_ENV=test npm run test:db:migrate && npm run test:db:seed",
-    "test": "NODE_ENV=test jest --forceExit"
+    "dev:db:drop": "NODE_ENV=development npm run db:drop",
+    "dev:db:create": "NODE_ENV=development npm run db:create",
+    "dev:db:fill": "NODE_ENV=development npm run dev:db:drop && npm run dev:db:create && npm run dev:db:migrate && npm run dev:db:seed",
+    "test": "NODE_ENV=test jest --runInBand"
   },
   "author": "whitershade",
   "license": "ISC",
   "dependencies": {
     "app-root-path": "^2.2.1",
     "body-parser": "^1.19.0",
+    "child-process-promise": "^2.2.1",
     "compression": "^1.7.4",
     "eslint-config-airbnb-base": "^14.0.0",
     "express": "^4.17.1",
@@ -30,11 +32,13 @@
     "lodash": "^4.17.15",
     "markdown-js": "0.0.4",
     "morgan": "^1.9.1",
+    "multer": "^1.4.2",
     "mysql2": "^1.7.0",
     "nodemon": "^1.19.3",
     "sequelize": "^5.21.1",
     "supertest": "^4.0.2",
     "swagger-ui-express": "^4.1.2",
+    "uniqid": "^5.0.3",
     "winston": "^3.2.1"
   },
   "eslintConfig": {
@@ -45,12 +49,6 @@
     "eslint-plugin-import": "^2.18.2",
     "husky": "^3.0.9",
     "sequelize-cli": "^5.5.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint",
-      "pre-push": "npm run test"
-    }
   },
   "jest": {
     "testEnvironment": "node",

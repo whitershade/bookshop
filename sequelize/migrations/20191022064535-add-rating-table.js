@@ -2,7 +2,11 @@ const tableName = 'Ratings';
 
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable(tableName, {
-    id: Sequelize.INTEGER,
+    id: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     bookId: Sequelize.INTEGER,
     rate: Sequelize.INTEGER,
     createdAt: Sequelize.DATE,

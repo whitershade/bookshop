@@ -1,14 +1,9 @@
-const tableName = 'Authors';
+const tableName = 'Users';
 
 module.exports = {
   up: (queryInterface) => queryInterface.bulkInsert(tableName, [{
-    name: 'Joanne Rowling',
-  },
-  {
-    name: 'John Ronald Reuel Tolkien',
-  },
-  {
-    name: 'Sir Arthur Charles Clarke',
+    firstName: 'Alexander',
+    lastName: 'Prokopenko',
   }], {}),
 
   down: (queryInterface) => queryInterface.bulkDelete(tableName, null, {}),

@@ -58,17 +58,6 @@ services:
     networks:
       - app-network
 
-  test-migrations:
-    build:
-      context: .
-    command: bash -c "cd ./build && ls && chmod +x ./run_migrations.sh && ./run_migrations.sh test"
-    links:
-      - mysql-test
-    depends_on:
-      - mysql-test
-    networks:
-      - app-network
-
 networks:
   app-network:
     driver: bridge

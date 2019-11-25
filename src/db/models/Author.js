@@ -12,10 +12,4 @@ Author.init({
   },
 }, { sequelize, modelName: 'Author' });
 
-Author.belongsToMany(Author, {
-  through: 'BookToAuthor',
-  as: 'Author',
-  foreignKey: 'authorId',
-});
-
 module.exports = Author;
