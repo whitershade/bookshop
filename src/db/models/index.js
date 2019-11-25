@@ -33,6 +33,15 @@ Rating.belongsTo(Book, {
   foreignKey: 'bookId',
 });
 
+Rating.belongsTo(User, {
+  foreignKey: 'userId',
+});
+
+// User
+User.hasMany(Rating, {
+  foreignKey: 'userId',
+});
+
 module.exports = {
   Author,
   Book,
