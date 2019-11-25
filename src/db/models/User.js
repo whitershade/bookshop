@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../sequelize');
-const { getHashPasswordAndSalt } = require('../../utils/getHashPasswordAndSalt');
+const { getPasswordHashAndSalt } = require('../../utils/getHashPasswordAndSalt');
 
 class User extends Model {}
 
@@ -45,13 +45,13 @@ User.init({
   modelName: 'User',
   hooks: {
     beforeCreate: async (user) => {
-      const { passwordHash: password, salt } = await getHashPasswordAndSalt(user.password);
+      const { passwordHash: password, salt } = await getPasswordHashAndSalt(user.password);
       user.password = password;
       user.salt = salt;
     },
     beforeBulkCreate: async (users) => {
       const hashArr = await Promise.all(
-        users.map(((user) => getHashPasswordAndSalt(user.password))),
+        users.map(((user) => getPasswordHashAndSalt(user.password))),
       );
       users.forEach((user, i) => {
         user.password = hashArr[i].password;

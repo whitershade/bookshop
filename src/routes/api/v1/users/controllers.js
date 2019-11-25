@@ -80,10 +80,10 @@ const controllers = {
       id: user.id,
       role: user.role,
     };
-    const token = await sign(payload, 'secret', { expiresIn: 3600 });
-    res.cookie('token', `Bearer ${token}`);
+    const jwtToken = await sign(payload, 'secret', { expiresIn: 3600 });
+    res.cookie('jwtToken', jwtToken);
 
-    return res.json({ token: `Bearer ${token}` });
+    return res.json({ jwtToken });
   },
   logout: (req, res) => {
     res.clearCookie('token');
