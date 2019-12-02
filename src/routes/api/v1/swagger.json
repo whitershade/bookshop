@@ -257,6 +257,16 @@
           "type": "file",
           "description": "The avatar to upload",
           "name": "avatar"
+        }, {
+          "name": "body",
+          "in": "formData",
+          "name": "email",
+          "type": "string"
+        }, {
+          "name": "body",
+          "in": "formData",
+          "name": "password",
+          "type": "string"
         }],
         "summary": "Create new User",
         "responses": {
@@ -316,18 +326,50 @@
           "name": "body",
           "in": "body",
           "example": {
-            "email": "my-email@email.com",
+            "email": "my@email.com",
             "password": "qwerty"
           }
-        }]
+        }],
+        "responses": {
+          "200": {
+            "description": "You successfully logged in"
+          }
+        }
       }
     },
     "/users/logout": {
       "get": {
         "tags": [
           "Users"
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "You successfully logged out"
+          }
+        }
       }
+    },
+    "/users/{userIdToRemove}": {
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Remove User by id",
+        "responses": {
+          "200": {
+            "description": "User was deleted"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "userIdToRemove",
+          "in": "path",
+          "required": true,
+          "description": "Id of the User we want to delete",
+          "type": "number"
+        }
+      ]
     }
   },
   "definitions": {

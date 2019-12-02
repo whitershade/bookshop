@@ -9,6 +9,7 @@ const { Strategy: JwtStrategy } = require('passport-jwt');
 
 const routes = require('./routes');
 const logger = require('./logger');
+const { jwtSecret } = require('../.credentials');
 const { User } = require('../src/db/models');
 
 module.exports = (app) => {
@@ -34,7 +35,7 @@ module.exports = (app) => {
 
       return token;
     },
-    secretOrKey: 'secret',
+    secretOrKey: jwtSecret,
   }, async (userProps, done) => {
     const user = await User.findByPk(userProps.id);
     if (!user) return done(null, false);
