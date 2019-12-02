@@ -1,10 +1,11 @@
 const { Router } = require('express');
 const controllers = require('./controllers');
+const { isLoggedIn } = require('./../middlewares');
 
 const router = Router();
 
 router
-  .post('/', controllers.createItem)
-  .patch('/:id', controllers.updateItem);
+  .post('/', isLoggedIn, controllers.createItem)
+  .patch('/:id', isLoggedIn, controllers.updateItem);
 
 module.exports = router;
