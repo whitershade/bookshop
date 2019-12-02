@@ -1,16 +1,44 @@
-version: "3"
+version: "3.2"
 services:
-  node-app:
+  backend1:
+    tty: true
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: node-app
     command: npm run start
     depends_on:
       - mysql-development
     restart: always
-    ports:
-      - "8080:8080"
+    volumes:
+      - .:/src
+      - /src/node_modules
+    networks:
+      - app-network
+
+  backend2:
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run start
+    depends_on:
+      - mysql-development
+    restart: always
+    volumes:
+      - .:/src
+      - /src/node_modules
+    networks:
+      - app-network
+
+  backend3:
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run start
+    depends_on:
+      - mysql-development
+    restart: always
     volumes:
       - .:/src
       - /src/node_modules
@@ -58,6 +86,19 @@ services:
     networks:
       - app-network
 
+  loadbalancer:
+    build: ./load-balancer
+    tty: true
+    links:
+      - backend1
+      - backend2
+      - backend3
+    ports:
+      - '8080:8080'
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge
+
