@@ -51,11 +51,10 @@ User.init({
       user.salt = salt;
     },
     beforeBulkCreate: async (users) => {
-      const hashArr = await Promise.all(
-        users.map(((user) => getPasswordHashAndSalt(user.password))),
-      );
+      const hashArr = users.map(((user) => getPasswordHashAndSalt(user.password)));
+
       users.forEach((user, i) => {
-        user.password = hashArr[i].password;
+        user.password = hashArr[i].passwordHash;
         user.salt = hashArr[i].salt;
       });
     },

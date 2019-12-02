@@ -17,7 +17,8 @@
     "dev:db:drop": "NODE_ENV=development npm run db:drop",
     "dev:db:create": "NODE_ENV=development npm run db:create",
     "dev:db:fill": "NODE_ENV=development npm run dev:db:drop && npm run dev:db:create && npm run dev:db:migrate && npm run dev:db:seed",
-    "test": "NODE_ENV=test jest --runInBand"
+    "test": "NODE_ENV=test jest --runInBand",
+    "testCoverage": "NODE_ENV=test jest --collect-coverage --runInBand"
   },
   "author": "whitershade",
   "license": "ISC",

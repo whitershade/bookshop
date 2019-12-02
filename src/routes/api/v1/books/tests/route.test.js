@@ -90,6 +90,7 @@ describe('PATCH', () => {
           id: 14,
           rate: 9,
           updatedAt: '2019-11-12T08:19:13.000Z',
+          userId: 1,
         },
       ],
       Authors: [

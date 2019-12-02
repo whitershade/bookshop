@@ -9,7 +9,7 @@
         "MYSQL_PORT": 3306
     },
     "test": {
-        "PORT": 8081,
+        "PORT": 8090,
         "MYSQL_DIALECT": "mysql",
         "MYSQL_HOST": "localhost",
         "MYSQL_USER": "books_user",

@@ -85,7 +85,6 @@ const controllers = {
   },
 
   getItems: async (req, res) => {
-    console.log('get books');
     const books = await Book.findAll({ include: defaultInclude });
 
     res.json(books);

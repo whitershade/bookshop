@@ -1,3 +1,6 @@
+# macOS
+.DS_Store
+
 # idea
 .idea
 
@@ -12,4 +15,8 @@ jspm_packages/
 # Optional npm cache directory
 .npm
 
+# Test
+coverage/
+
 public/
+

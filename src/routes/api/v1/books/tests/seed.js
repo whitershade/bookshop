@@ -29,6 +29,7 @@ module.exports = [
         createdAt: DATETIME,
         updatedAt: DATETIME,
         bookId: 1,
+        userId: 1,
       },
       {
         id: 2,
@@ -36,6 +37,7 @@ module.exports = [
         createdAt: DATETIME,
         updatedAt: DATETIME,
         bookId: 1,
+        userId: 1,
       },
       {
         id: 3,
@@ -43,6 +45,7 @@ module.exports = [
         createdAt: DATETIME,
         updatedAt: DATETIME,
         bookId: 1,
+        userId: 1,
       },
       {
         id: 4,
@@ -50,6 +53,7 @@ module.exports = [
         createdAt: DATETIME,
         updatedAt: DATETIME,
         bookId: 1,
+        userId: 1,
       },
     ],
   },
@@ -81,6 +85,7 @@ module.exports = [
         createdAt: DATETIME,
         updatedAt: DATETIME,
         bookId: 2,
+        userId: 1,
       },
       {
         id: 6,
@@ -88,6 +93,7 @@ module.exports = [
         createdAt: DATETIME,
         updatedAt: DATETIME,
         bookId: 2,
+        userId: 1,
       },
       {
         id: 7,
@@ -95,6 +101,7 @@ module.exports = [
         createdAt: DATETIME,
         updatedAt: DATETIME,
         bookId: 2,
+        userId: 1,
       },
     ],
   },
@@ -126,6 +133,7 @@ module.exports = [
         createdAt: DATETIME,
         updatedAt: DATETIME,
         bookId: 3,
+        userId: 1,
       },
       {
         id: 9,
@@ -133,6 +141,7 @@ module.exports = [
         createdAt: DATETIME,
         updatedAt: DATETIME,
         bookId: 3,
+        userId: 1,
       },
       {
         id: 10,
@@ -140,6 +149,7 @@ module.exports = [
         createdAt: DATETIME,
         updatedAt: DATETIME,
         bookId: 3,
+        userId: 1,
       },
       {
         id: 11,
@@ -147,6 +157,7 @@ module.exports = [
         createdAt: DATETIME,
         updatedAt: DATETIME,
         bookId: 3,
+        userId: 1,
       },
       {
         id: 12,
@@ -154,6 +165,7 @@ module.exports = [
         createdAt: DATETIME,
         updatedAt: DATETIME,
         bookId: 3,
+        userId: 1,
       },
     ],
   },
@@ -185,6 +197,7 @@ module.exports = [
         createdAt: DATETIME,
         updatedAt: DATETIME,
         bookId: 4,
+        userId: 1,
       },
     ],
   },
@@ -216,6 +229,7 @@ module.exports = [
         createdAt: DATETIME,
         updatedAt: DATETIME,
         bookId: 5,
+        userId: 1,
       },
     ],
   },

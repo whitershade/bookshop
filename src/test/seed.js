@@ -3,6 +3,20 @@ const sequelize = require('../db/sequelize');
 
 const DATETIME = '2019-11-12T08:19:13.000Z';
 
+const usersSeed = [{
+  firstName: 'admin',
+  lastName: 'user',
+  password: 'password',
+  email: 'admin@email.com',
+  role: 'admin',
+}, {
+  firstName: 'just',
+  lastName: 'user',
+  password: 'password',
+  email: 'user@email.com',
+  role: 'user',
+}];
+
 const authorNames = [
   'Joanne Rowling',
   'John Ronald Reuel Tolkien',
@@ -22,66 +36,86 @@ const bookNames = [
   'The wind from the Sun',
 ];
 
-const ratings = [
+const ratingsSeed = [
   {
     rate: 10,
     bookId: 1,
+    userId: 1,
   },
   {
     rate: 10,
     bookId: 1,
+    userId: 1,
   },
   {
     rate: 10,
     bookId: 1,
+    userId: 1,
   },
   {
     rate: 10,
     bookId: 1,
+    userId: 1,
   },
   {
     rate: 9,
     bookId: 2,
+    userId: 1,
   },
   {
     rate: 8,
     bookId: 2,
+    userId: 1,
   },
   {
     rate: 8,
     bookId: 2,
+    userId: 1,
   },
   {
     rate: 7,
     bookId: 3,
+    userId: 1,
   },
   {
     rate: 8,
     bookId: 3,
+    userId: 1,
   },
   {
     rate: 9,
     bookId: 3,
+    userId: 1,
   },
   {
     rate: 8,
     bookId: 3,
+    userId: 1,
   },
   {
     rate: 7,
     bookId: 3,
+    userId: 1,
   },
   {
     rate: 10,
     bookId: 4,
+    userId: 1,
   },
   {
     rate: 9,
     bookId: 5,
+    userId: 1,
   },
 ];
 
 const seedDb = async () => {
+  await models.User.bulkCreate(usersSeed.map((user) => ({
+    ...user,
+    createdAt: DATETIME,
+    updatedAt: DATETIME,
+  })));
+
   const [books, genres, authors] = await Promise.all([
     models.Book.bulkCreate(bookNames.map((bookName) => ({
       name: bookName,
@@ -98,7 +132,7 @@ const seedDb = async () => {
       createdAt: DATETIME,
       updatedAt: DATETIME,
     }))),
-    models.Rating.bulkCreate(ratings.map((rating) => ({
+    models.Rating.bulkCreate(ratingsSeed.map((rating) => ({
       ...rating,
       createdAt: DATETIME,
       updatedAt: DATETIME,

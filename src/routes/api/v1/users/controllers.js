@@ -73,7 +73,7 @@ const controllers = {
     } catch (e) {
       logger.error(e);
 
-      res.sendStatus(500);
+      return res.sendStatus(500);
     }
   },
   deleteItem: async (req, res) => {
